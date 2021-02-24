@@ -38,6 +38,39 @@ namespace Wisej.Web.Ext.DevExpress.Dashboard
 
 		#endregion
 
+		#region Events
+
+		public event CustomDataCallbackEventHandler CustomDataCallback;
+
+		private void dashboard_CustomDataCallback(object sender, global::DevExpress.Web.CustomDataCallbackEventArgs e)
+		{
+			if (CustomDataCallback != null)
+			{
+				Application.Update(this, () =>
+				{
+					CustomDataCallback(sender, e);
+				});
+			}
+		}
+
+		/// <summary>
+		/// Allows you to provide data for the DevExpress.DashboardCommon.DashboardObjectDataSource.
+		/// </summary>
+		public event DataLoadingWebEventHandler DataLoading;
+
+		void dashboard_DataLoading(object sender, DataLoadingWebEventArgs e)
+		{
+			if (DataLoading != null)
+			{
+				Application.Update(this, () =>
+				{
+					DataLoading(sender, e);
+				});
+			}
+		}
+
+		#endregion
+
 		#region Properties
 
 		public DashboardControlClientSideEvents ClientSideEvents
@@ -187,6 +220,24 @@ namespace Wisej.Web.Ext.DevExpress.Dashboard
 
 		#endregion
 
+		#region Methods
+
+		public void SetDataSourceStorage(IDataSourceStorage dataSourceStorage)
+		{
+			this._dataSourceStorage = dataSourceStorage;
+			Update();
+		}
+		private IDataSourceStorage _dataSourceStorage;
+
+		public void SetDashboardStorage(IDashboardStorage dashboardStorage)
+		{
+			this._dashboardStorage = dashboardStorage;
+			Update();
+		}
+		private IDashboardStorage _dashboardStorage;
+
+		#endregion
+
 		#region Initialization
 
 		protected override void OnInit(EventArgs e)
@@ -203,6 +254,11 @@ namespace Wisej.Web.Ext.DevExpress.Dashboard
 			// assign properties.
 			dashboard.ClientInstanceName = this.ClientInstanceName;
 			dashboard.AllowCreateNewDashboard = this.AllowCreateNewDashboard;
+			dashboard.AllowCreateNewJsonConnection = this.AllowCreateNewJsonConnection;
+			dashboard.AllowExecutingCustomSql = this.AllowExecutingCustomSql;
+			dashboard.AllowExportDashboard = this.AllowExportDashboard;
+			dashboard.AllowExportDashboardItems = this.AllowExportDashboardItems;
+			dashboard.AllowInspectAggregatedData = this.AllowInspectAggregatedData;
 
 			// invoke methods.
 			dashboard.SetDashboardStorage(this._dashboardStorage);
@@ -224,55 +280,5 @@ namespace Wisej.Web.Ext.DevExpress.Dashboard
 
 		#endregion
 
-		#region Methods
-
-		public void SetDataSourceStorage(IDataSourceStorage dataSourceStorage)
-		{
-			this._dataSourceStorage = dataSourceStorage;
-			Update();
-		}
-		private IDataSourceStorage _dataSourceStorage;
-
-		public void SetDashboardStorage(IDashboardStorage dashboardStorage)
-		{
-			this._dashboardStorage = dashboardStorage;
-			Update();
-		}
-		private IDashboardStorage _dashboardStorage;
-
-		#endregion
-
-		#region Events
-
-		public event CustomDataCallbackEventHandler CustomDataCallback;
-
-		private void dashboard_CustomDataCallback(object sender, global::DevExpress.Web.CustomDataCallbackEventArgs e)
-		{
-			if (CustomDataCallback != null)
-			{
-				Application.Update(this, () =>
-				{
-					CustomDataCallback(sender, e);
-				});
-			}
-		}
-
-		/// <summary>
-		/// Allows you to provide data for the DevExpress.DashboardCommon.DashboardObjectDataSource.
-		/// </summary>
-		public event DataLoadingWebEventHandler DataLoading;
-
-		void dashboard_DataLoading(object sender, DataLoadingWebEventArgs e)
-		{
-			if (DataLoading != null)
-			{
-				Application.Update(this, () =>
-				{
-					DataLoading(sender, e);
-				});
-			}
-		}
-
-		#endregion
 	}
 }
