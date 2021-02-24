@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wisej.Web.Ext.DevExpress.Dashboard.Sample", "..\Wisej.Web.Ext.DevExpress.Dashboard\Wisej.Web.Ext.DevExpress.Dashboard.Sample\Wisej.Web.Ext.DevExpress.Dashboard.Sample.csproj", "{13189BAC-9153-400D-AE5C-4E37EB99D569}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wisej.Web.Ext.DevExpress.Dashboard", "..\Wisej.Web.Ext.DevExpress.Dashboard\Wisej.Web.Ext.DevExpress.Dashboard\Wisej.Web.Ext.DevExpress.Dashboard.csproj", "{A3272F16-5627-4DEF-85AD-E60228DE3E96}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{13189BAC-9153-400D-AE5C-4E37EB99D569}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13189BAC-9153-400D-AE5C-4E37EB99D569}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13189BAC-9153-400D-AE5C-4E37EB99D569}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13189BAC-9153-400D-AE5C-4E37EB99D569}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3272F16-5627-4DEF-85AD-E60228DE3E96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3272F16-5627-4DEF-85AD-E60228DE3E96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3272F16-5627-4DEF-85AD-E60228DE3E96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3272F16-5627-4DEF-85AD-E60228DE3E96}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9B194808-C65A-4F27-B01E-B1EE5FAACC93}
+	EndGlobalSection
+EndGlobal
