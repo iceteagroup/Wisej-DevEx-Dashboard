@@ -253,12 +253,12 @@ namespace Wisej.Web.Ext.DevExpress.Dashboard
 
 			// assign properties.
 			dashboard.ClientInstanceName = this.ClientInstanceName;
-			dashboard.AllowCreateNewDashboard = this.AllowCreateNewDashboard;
-			dashboard.AllowCreateNewJsonConnection = this.AllowCreateNewJsonConnection;
-			dashboard.AllowExecutingCustomSql = this.AllowExecutingCustomSql;
 			dashboard.AllowExportDashboard = this.AllowExportDashboard;
+			dashboard.AllowCreateNewDashboard = this.AllowCreateNewDashboard;
+			dashboard.AllowExecutingCustomSql = this.AllowExecutingCustomSql;
 			dashboard.AllowExportDashboardItems = this.AllowExportDashboardItems;
 			dashboard.AllowInspectAggregatedData = this.AllowInspectAggregatedData;
+			dashboard.AllowCreateNewJsonConnection = this.AllowCreateNewJsonConnection;
 
 			// invoke methods.
 			dashboard.SetDashboardStorage(this._dashboardStorage);
