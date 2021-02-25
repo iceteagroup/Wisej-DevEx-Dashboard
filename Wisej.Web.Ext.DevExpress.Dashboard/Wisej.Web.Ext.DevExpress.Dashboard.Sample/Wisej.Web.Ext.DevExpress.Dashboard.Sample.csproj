@@ -55,33 +55,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AspNetPanel\MyPage.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AspNetControl\Window2.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AspNetControl\Window2.Designer.cs">
-      <DependentUpon>Window2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="AspNetPanel\MyASPxDashboard.cs" />
-    <Compile Include="AspNetPanel\MyASPxDashboard.Designer.cs">
-      <DependentUpon>MyASPxDashboard.cs</DependentUpon>
-    </Compile>
-    <Compile Include="AspNetPanel\MyPage.aspx.cs">
-      <DependentUpon>MyPage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AspNetPanel\MyPage.aspx.designer.cs">
-      <DependentUpon>MyPage.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="AspNetPanel\Window1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="AspNetPanel\Window1.Designer.cs">
-      <DependentUpon>Window1.cs</DependentUpon>
-    </Compile>
     <Compile Include="Page1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -142,12 +118,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="AspNetControl\Window2.resx">
-      <DependentUpon>Window2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AspNetPanel\Window1.resx">
-      <DependentUpon>Window1.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Page1.resx">
       <DependentUpon>Page1.cs</DependentUpon>
     </EmbeddedResource>
