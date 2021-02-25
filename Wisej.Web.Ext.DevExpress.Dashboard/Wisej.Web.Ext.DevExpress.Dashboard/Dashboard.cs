@@ -733,6 +733,20 @@ namespace Wisej.Web.Ext.DevExpress.Dashboard
 
 		//
 		// Summary:
+		//     Loads a dashboard from a string containing a dashboard XML definition.
+		//
+		// Parameters:
+		//   xml:
+		//     A System.String value that specifies a dashboard XML definition.
+		public void OpenDashboard(string xml)
+		{
+			this._xml = xml;
+			Update();
+		}
+		private string _xml;
+
+		//
+		// Summary:
 		//     Specifies a data source storage for the Web Dashboard.
 		//
 		// Parameters:
@@ -816,6 +830,7 @@ namespace Wisej.Web.Ext.DevExpress.Dashboard
 			
 			// invoke methods.
 			dashboard.ApplyStyle(this._s);
+			dashboard.OpenDashboard(this._xml);
 			dashboard.SetDashboardStorage(this._dashboardStorage);
 			dashboard.SetDataSourceStorage(this._dataSourceStorage);
 		}
