@@ -1,6 +1,4 @@
-# Wisej-DevEx-Dashboard
-
-## Wisej Integration of DevExpress' ASPxDashboard
+# Wisej Integration of DevExpress' ASPxDashboard
 
 ### What's Included
 * DevExpress Dashboard Sample Project
