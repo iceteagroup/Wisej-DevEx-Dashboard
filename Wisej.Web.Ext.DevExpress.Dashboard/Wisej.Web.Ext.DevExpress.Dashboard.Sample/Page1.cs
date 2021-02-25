@@ -60,9 +60,7 @@ namespace Wisej.Web.Ext.DevExpress.Dashboard.Sample
 		{
 			// Fires when data source is requested and not found locally within the wrapped dashboard.
 			if (e.DataSourceName == "Object Data Source")
-			{
-				e.Data = SalesPersonData.CreateData();
-			}
+				e.Data = SalesPersonData.CreateDataWithDataTable();
 		}
 	}
 }
