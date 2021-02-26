@@ -2,6 +2,7 @@
 using DevExpress.Web;
 using System;
 using System.ComponentModel;
+using System.Drawing;
 using System.Web.UI.WebControls;
 using Wisej.Web.Ext.AspNetControl;
 
@@ -10,6 +11,8 @@ namespace Wisej.Web.Ext.DevExpress.Dashboard
 	/// <summary>
 	/// Represents a wrapped <see cref="ASPxDashboard"/> for Wisej.
 	/// </summary>
+	[ToolboxItem(true)]
+	[ToolboxBitmap(typeof(Dashboard), "DevExtreme.bmp")]
 	public class Dashboard : AspNetWrapper<ASPxDashboard>
 	{
 		public Dashboard()
