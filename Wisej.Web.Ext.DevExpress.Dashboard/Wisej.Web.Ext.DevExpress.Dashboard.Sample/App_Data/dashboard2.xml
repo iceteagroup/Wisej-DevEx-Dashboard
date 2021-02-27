@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dashboard>
+  <Title Text="New Dashboard" />
+  <DataSources>
+    <ObjectDataSource Name="Object Data Source" ComponentName="objectDataSource1">
+      <DataSource Type="Wisej.Web.Ext.DevExpress.Dashboard.Sample.SalesPersonData, Wisej.Web.Ext.DevExpress.Dashboard.Sample, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
+    </ObjectDataSource>
+  </DataSources>
+  <Items>
+    <Gauge ComponentName="gaugeDashboardItem1" Name="Gauges 1" DataSource="objectDataSource1">
+      <DataItems>
+        <Measure DataMember="Quantity" DefaultId="DataItem0" />
+      </DataItems>
+      <GaugeElement>
+        <ActualValue DefaultId="DataItem0" />
+        <AbsoluteVariationNumericFormat />
+        <PercentVariationNumericFormat />
+        <PercentOfTargetNumericFormat />
+      </GaugeElement>
+    </Gauge>
+  </Items>
+  <LayoutTree>
+    <LayoutGroup>
+      <LayoutItem DashboardItem="gaugeDashboardItem1" />
+    </LayoutGroup>
+  </LayoutTree>
+</Dashboard>

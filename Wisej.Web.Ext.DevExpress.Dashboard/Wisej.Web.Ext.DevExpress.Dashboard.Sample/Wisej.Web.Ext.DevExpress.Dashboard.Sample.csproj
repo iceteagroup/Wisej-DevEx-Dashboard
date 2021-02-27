@@ -43,7 +43,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="App_Data\Dashboards\dashboard1.xml" />
+    <Content Include="App_Data\dashboard1.xml" />
     <Content Include="Default.html" />
     <Content Include="Default.json" />
     <Content Include="favicon.ico" />
@@ -69,6 +69,7 @@
     <Compile Include="SalesPersonData.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\Dashboards\" />
     <Folder Include="Themes\" />
   </ItemGroup>
   <ItemGroup>
@@ -113,15 +114,18 @@
     <Reference Include="Wisej.Web.Ext.AspNetControl">
       <HintPath>..\..\itg\Extensions\2.2\Wisej.Web.Ext.AspNetControl\bin\Debug\Wisej.Web.Ext.AspNetControl.dll</HintPath>
     </Reference>
-    <Reference Include="Wisej.Web.Ext.DevExpress.Dashboard">
-      <HintPath>..\Wisej.Web.Ext.DevExpressDashboard\bin\Debug\Wisej.Web.Ext.DevExpress.Dashboard.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Page1.resx">
       <DependentUpon>Page1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Wisej.Web.Ext.DevExpress.Dashboard\Wisej.Web.Ext.DevExpress.Dashboard.csproj">
+      <Project>{a3272f16-5627-4def-85ad-e60228de3e96}</Project>
+      <Name>Wisej.Web.Ext.DevExpress.Dashboard</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

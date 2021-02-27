@@ -4,6 +4,7 @@ using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Web.UI.WebControls;
+using System.Xml.Linq;
 using Wisej.Web.Ext.AspNetControl;
 
 namespace Wisej.Web.Ext.DevExpress.Dashboard
@@ -42,19 +43,6 @@ namespace Wisej.Web.Ext.DevExpress.Dashboard
 		#endregion
 
 		#region Events
-
-		/// <summary>
-		/// Uses reflection to assign all the client-side events.
-		/// </summary>
-		private void AssignClientSideEvents()
-		{
-			var dashboardClientSideEvents = this.WrappedControl.ClientSideEvents;
-			var properties = TypeDescriptor.GetProperties(this.ClientSideEvents);
-			foreach (PropertyDescriptor p in properties)
-			{
-				p.SetValue(dashboardClientSideEvents, p.GetValue(this.ClientSideEvents));
-			}
-		}
 
 		public event CustomDataCallbackEventHandler CustomDataCallback;
 
@@ -329,6 +317,37 @@ namespace Wisej.Web.Ext.DevExpress.Dashboard
 
 		#region Properties
 
+		/// <summary>
+		/// Specifies options that allow you to configure the Web Dashboard's back-end.
+		/// </summary>
+		public DashboardBackendOptions BackendOptions
+		{ 
+			get
+			{
+				return
+					this._backendOptions
+						= this._backendOptions
+							?? new DashboardBackendOptions();
+			}
+		}
+		private DashboardBackendOptions _backendOptions;
+
+		/// <summary>
+		/// Uses reflection to assign the backend options.
+		/// </summary>
+		private void AssignBackendOptions(ASPxDashboard dashboard)
+		{
+			var backendOptions = dashboard.BackendOptions;
+			var properties = TypeDescriptor.GetProperties(this.BackendOptions);
+			foreach (PropertyDescriptor p in properties)
+			{
+				p.SetValue(backendOptions, p.GetValue(this.BackendOptions));
+			}
+		}
+
+		/// <summary>
+		/// Gets an object that lists the client-side events specific to the ASPxDashboard control.
+		/// </summary>
 		public DashboardControlClientSideEvents ClientSideEvents
 		{
 			get
@@ -340,6 +359,19 @@ namespace Wisej.Web.Ext.DevExpress.Dashboard
 			}
 		}
 		private DashboardControlClientSideEvents _clientSideEvents;
+
+		/// <summary>
+		/// Uses reflection to assign the client-side events.
+		/// </summary>
+		private void AssignClientSideEvents(ASPxDashboard dashboard)
+		{
+			var dashboardClientSideEvents = dashboard.ClientSideEvents;
+			var properties = TypeDescriptor.GetProperties(this.ClientSideEvents);
+			foreach (PropertyDescriptor p in properties)
+			{
+				p.SetValue(dashboardClientSideEvents, p.GetValue(this.ClientSideEvents));
+			}
+		}
 
 		/// <summary>
 		/// Gets or sets the ASPxDashboard's client programmatic identifier.
@@ -718,15 +750,12 @@ namespace Wisej.Web.Ext.DevExpress.Dashboard
 
 		#region Methods
 
-		//
-		// Summary:
-		//     Copies any nonblank elements of the specified style to the Web control, overwriting
-		//     any existing style elements of the control. This method is primarily used by
-		//     control developers.
-		//
-		// Parameters:
-		//   s:
-		//     A System.Web.UI.WebControls.Style that represents the style to be copied.
+		/// <summary>
+		/// Copies any nonblank elements of the specified style to the Web control, overwriting
+		///     any existing style elements of the control. This method is primarily used by
+		///     control developers.
+		/// </summary>
+		/// <param name="s">A System.Web.UI.WebControls.Style that represents the style to be copied.</param>
 		public void ApplyStyle(Style s)
 		{
 			this._s = s;
@@ -734,28 +763,32 @@ namespace Wisej.Web.Ext.DevExpress.Dashboard
 		}
 		private Style _s;
 
-		//
-		// Summary:
-		//     Loads a dashboard from a string containing a dashboard XML definition.
-		//
-		// Parameters:
-		//   xml:
-		//     A System.String value that specifies a dashboard XML definition.
+		/// <summary>
+		/// Loads a dashboard from a string containing a dashboard XML definition.
+		/// </summary>
+		/// <remarks>Note that the OpenDashboard method can be used only on the initial page loading (in the Page_Load event handler).</remarks>
+		/// <param name="xml">A System.String value that specifies a dashboard XML definition.</param>
 		public void OpenDashboard(string xml)
 		{
-			this._xml = xml;
-			Update();
+			this.WrappedControl.OpenDashboard(xml);
 		}
-		private string _xml;
 
-		//
-		// Summary:
-		//     Specifies a data source storage for the Web Dashboard.
-		//
-		// Parameters:
-		//   dataSourceStorage:
-		//     An object implementing the DevExpress.DashboardWeb.IDataSourceStorage interface
-		//     that is a storage of the dashboard data sources.
+		/// <summary>
+		/// Loads a dashboard from a document containing a dashboard XML definition.
+		/// </summary>
+		/// <remarks>Note that the OpenDashboard method can be used only on the initial page loading (in the Page_Load event handler).</remarks>
+		/// <param name="document">A System.Xml.Linq.XDocument object that is a document 
+		/// containing a dashboard xml definition.</param>
+		public void OpenDashboard(XDocument document)
+		{
+			this.WrappedControl.OpenDashboard(document);
+		}
+
+		/// <summary>
+		/// Specifies a data source storage for the Web Dashboard.
+		/// </summary>
+		/// <param name="dataSourceStorage">An object implementing the DevExpress.DashboardWeb.IDataSourceStorage interface
+		/// that is a storage of the dashboard data sources.</param>
 		public void SetDataSourceStorage(IDataSourceStorage dataSourceStorage)
 		{
 			this._dataSourceStorage = dataSourceStorage;
@@ -763,14 +796,11 @@ namespace Wisej.Web.Ext.DevExpress.Dashboard
 		}
 		private IDataSourceStorage _dataSourceStorage;
 
-		//
-		// Summary:
-		//     Specifies a custom storage of dashboards for the Web Dashboard.
-		//
-		// Parameters:
-		//   dashboardStorage:
-		//     An object implementing the DevExpress.DashboardWeb.IDashboardStorage interface
-		//     that is the custom storage of dashboards.
+		/// <summary>
+		/// Specifies a custom storage of dashboards for the Web Dashboard.
+		/// </summary>
+		/// <param name="dashboardStorage">An object implementing the DevExpress.DashboardWeb.IDashboardStorage
+		/// interface that is the custom storage of dashboards.</param>
 		public void SetDashboardStorage(IDashboardStorage dashboardStorage)
 		{
 			this._dashboardStorage = dashboardStorage;
@@ -788,27 +818,8 @@ namespace Wisej.Web.Ext.DevExpress.Dashboard
 
 			var dashboard = this.WrappedControl;
 
-			// register events.
-			AssignClientSideEvents();
-			dashboard.DataLoading += this.dashboard_DataLoading;
-			dashboard.CustomExport += this.dashboard_CustomExport;
-			dashboard.CustomPalette += this.dashboard_CustomPalette;
-			dashboard.DashboardAdding += this.dashboard_DashboardAdding;
-			dashboard.DashboardSaving += this.dashboard_DashboardSaving;
-			dashboard.ConnectionError += this.dashboard_ConnectionError;
-			dashboard.DashboardLoading += this.dashboard_DashboardLoading;
-			dashboard.CustomParameters += this.dashboard_CustomParameters;
-			dashboard.CustomDataCallback += this.dashboard_CustomDataCallback;
-			dashboard.CustomJSProperties += this.dashboard_CustomJSProperties;
-			dashboard.BeforeExportDocument += this.dashboard_BeforeExportDocument;
-			dashboard.CustomFilterExpression += this.dashboard_CustomFilterExpression;
-			dashboard.ConfigureDataConnection += this.dashboard_ConfigureDataConnection;
-			dashboard.CustomizeExportDocument += this.dashboard_CustomizeExportDocument;
-			dashboard.SetInitialDashboardState += this.dashboard_SetInitialDashboardState;
-			dashboard.ConfigureItemDataCalculation += this.dashboard_ConfigureItemDataCalculation;
-			dashboard.ConfigureDataReloadingTimeout += this.dashboard_ConfigureDataReloadingTimeout;
-
 			// assign properties.
+			AssignBackendOptions(dashboard);
 			dashboard.Enabled = this.Enabled;
 			dashboard.BackColor = this.BackColor;
 			dashboard.ColorScheme = this.ColorScheme;
@@ -830,12 +841,26 @@ namespace Wisej.Web.Ext.DevExpress.Dashboard
 			dashboard.AllowExportDashboardItems = this.AllowExportDashboardItems;
 			dashboard.AllowInspectAggregatedData = this.AllowInspectAggregatedData;
 			dashboard.AllowCreateNewJsonConnection = this.AllowCreateNewJsonConnection;
-			
-			// invoke methods.
-			dashboard.ApplyStyle(this._s);
-			dashboard.OpenDashboard(this._xml);
-			dashboard.SetDashboardStorage(this._dashboardStorage);
-			dashboard.SetDataSourceStorage(this._dataSourceStorage);
+
+			// register events.
+			AssignClientSideEvents(dashboard);
+			dashboard.DataLoading += this.dashboard_DataLoading;
+			dashboard.CustomExport += this.dashboard_CustomExport;
+			dashboard.CustomPalette += this.dashboard_CustomPalette;
+			dashboard.DashboardAdding += this.dashboard_DashboardAdding;
+			dashboard.DashboardSaving += this.dashboard_DashboardSaving;
+			dashboard.ConnectionError += this.dashboard_ConnectionError;
+			dashboard.DashboardLoading += this.dashboard_DashboardLoading;
+			dashboard.CustomParameters += this.dashboard_CustomParameters;
+			dashboard.CustomDataCallback += this.dashboard_CustomDataCallback;
+			dashboard.CustomJSProperties += this.dashboard_CustomJSProperties;
+			dashboard.BeforeExportDocument += this.dashboard_BeforeExportDocument;
+			dashboard.CustomFilterExpression += this.dashboard_CustomFilterExpression;
+			dashboard.ConfigureDataConnection += this.dashboard_ConfigureDataConnection;
+			dashboard.CustomizeExportDocument += this.dashboard_CustomizeExportDocument;
+			dashboard.SetInitialDashboardState += this.dashboard_SetInitialDashboardState;
+			dashboard.ConfigureItemDataCalculation += this.dashboard_ConfigureItemDataCalculation;
+			dashboard.ConfigureDataReloadingTimeout += this.dashboard_ConfigureDataReloadingTimeout;
 		}
 
 		#endregion

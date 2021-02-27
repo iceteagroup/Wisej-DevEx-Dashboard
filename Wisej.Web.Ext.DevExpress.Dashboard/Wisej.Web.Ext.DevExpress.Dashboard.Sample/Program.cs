@@ -12,13 +12,5 @@ namespace Wisej.Web.Ext.DevExpress.Dashboard.Sample
 		{
 			Application.MainPage = new Page1();
 		}
-
-		//
-		// You can use the entry method below
-		// to receive the parameters from the URL in the args collection.
-		//
-		//static void Main(NameValueCollection args)
-		//{
-		//}
 	}
 }
