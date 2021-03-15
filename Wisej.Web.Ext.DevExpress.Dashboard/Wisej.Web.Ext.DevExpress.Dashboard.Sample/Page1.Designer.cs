@@ -36,7 +36,7 @@ namespace Wisej.Web.Ext.DevExpress.Dashboard.Sample
 			// button1
 			// 
 			this.button1.Anchor = Wisej.Web.AnchorStyles.Left;
-			this.button1.Location = new System.Drawing.Point(17, 299);
+			this.button1.Location = new System.Drawing.Point(17, 253);
 			this.button1.Name = "button1";
 			this.button1.Size = new System.Drawing.Size(122, 27);
 			this.button1.TabIndex = 2;
@@ -50,9 +50,10 @@ namespace Wisej.Web.Ext.DevExpress.Dashboard.Sample
             | Wisej.Web.AnchorStyles.Right)));
 			this.dashboard1.Location = new System.Drawing.Point(155, 83);
 			this.dashboard1.Name = "dashboard1";
-			this.dashboard1.Size = new System.Drawing.Size(817, 459);
+			this.dashboard1.Size = new System.Drawing.Size(817, 368);
 			this.dashboard1.TabIndex = 1;
 			this.dashboard1.Text = "aspNetPanel1";
+			this.dashboard1.Init += new System.EventHandler(this.dashboard1_Init);
 			// 
 			// Page1
 			// 
@@ -62,7 +63,7 @@ namespace Wisej.Web.Ext.DevExpress.Dashboard.Sample
 			this.Controls.Add(this.dashboard1);
 			this.Name = "Page1";
 			this.Padding = new Wisej.Web.Padding(8);
-			this.Size = new System.Drawing.Size(1127, 624);
+			this.Size = new System.Drawing.Size(1127, 533);
 			this.Text = "Page1";
 			this.Load += new System.EventHandler(this.Page1_Load);
 			this.ResumeLayout(false);

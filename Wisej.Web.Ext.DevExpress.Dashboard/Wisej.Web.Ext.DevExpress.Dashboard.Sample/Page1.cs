@@ -4,6 +4,7 @@ using DevExpress.DashboardWeb;
 using DevExpress.Web;
 using System;
 using System.IO;
+using System.Web.UI;
 
 namespace Wisej.Web.Ext.DevExpress.Dashboard.Sample
 {
@@ -25,10 +26,28 @@ namespace Wisej.Web.Ext.DevExpress.Dashboard.Sample
 			var dataSourceStorage = CreateDataSourceStorage();
 			this.dashboard1.SetDataSourceStorage(dataSourceStorage);
 
+			this.dashboard1.AllowInspectRawData = true;
+			this.dashboard1.AllowInspectAggregatedData = true;
+
 			// register events.
 			this.dashboard1.Load += Dashboard1_Load;
 			this.dashboard1.DataLoading += Dashboard1_DataLoading;
 			this.dashboard1.CustomDataCallback += Dashboard1_CustomDataCallback;
+			this.dashboard1.ClientSideEvents.BeforeRender = @"
+				function(sender) {
+					// configure dxGrid startup.
+					var control = sender.GetDashboardControl();
+					control.unregisterExtension('data-inspector');
+					control.registerExtension(new DevExpress.Dashboard.DataInspectorExtension(control, {
+						allowInspectAggregatedData: true,
+						allowInspectRawData: true,
+						onGridInitialized: function (args) {
+							args.component.option({
+								export: { enabled: true }
+							})
+						}
+					}));
+				}";
 			this.dashboard1.ClientSideEvents.ItemClick = @"
 				function(sender, e) {
 					dashboard1.PerformDataCallback(e.ItemName); 
@@ -77,6 +96,12 @@ namespace Wisej.Web.Ext.DevExpress.Dashboard.Sample
 
 			// alternate option.
 			// this.dashboard1.DashboardXmlPath = path;
+		}
+
+		private void dashboard1_Init(object sender, EventArgs e)
+		{
+			// register DashboardClient.js
+			this.dashboard1.ScriptManager.Scripts.Add(new ScriptReference("DashboardClient.js"));
 		}
 	}
 }
