@@ -818,6 +818,10 @@ namespace Wisej.Web.Ext.DevExpress.Dashboard
 
 			var dashboard = this.WrappedControl;
 
+			// ignore if processing multiple requests or the control hasn't completed preInit.
+			if (dashboard == null)
+				return;
+
 			// assign properties.
 			AssignBackendOptions(dashboard);
 			dashboard.Enabled = this.Enabled;

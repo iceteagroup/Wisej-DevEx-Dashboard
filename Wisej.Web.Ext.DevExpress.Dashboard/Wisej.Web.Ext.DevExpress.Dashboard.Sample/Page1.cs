@@ -52,6 +52,7 @@ namespace Wisej.Web.Ext.DevExpress.Dashboard.Sample
 				function(sender, e) {
 					dashboard1.PerformDataCallback(e.ItemName); 
 				}";
+			
 		}
 
 		private void Dashboard1_Load(object sender, EventArgs e)
@@ -59,6 +60,7 @@ namespace Wisej.Web.Ext.DevExpress.Dashboard.Sample
 			// OpenDashboard() can only be called in the ASPxDashboard's Load event.
 			if (!String.IsNullOrEmpty(this.dashboardXML))
 				this.dashboard1.OpenDashboard(this.dashboardXML);
+			//this.dashboard1.DashboardXmlPath = Application.MapPath("App_data/dashboard1.xml");
 		}
 
 		private void Dashboard1_CustomDataCallback(object sender, CustomDataCallbackEventArgs e)
@@ -105,3 +107,4 @@ namespace Wisej.Web.Ext.DevExpress.Dashboard.Sample
 		}
 	}
 }
+

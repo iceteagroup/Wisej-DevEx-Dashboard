@@ -1,4 +1,3 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
 <Dashboard>
   <Title Text="Sample Dashboard" />
   <DataSources>
@@ -54,6 +53,35 @@
       <SparklineArgument DefaultId="DataItem2" />
       <GridOptions />
     </Grid>
+    <GeoPointMap ComponentName="geoPointMapDashboardItem1" Name="Geo Point Map 1" DataSource="objectDataSource1">
+      <DataItems>
+        <Dimension DataMember="Quantity" DefaultId="DataItem0" />
+        <Dimension DataMember="Quantity" DefaultId="DataItem1" />
+        <Measure DataMember="SalesPerson" SummaryType="Count" DefaultId="DataItem2" />
+        <Dimension DataMember="SalesPerson" DefaultId="DataItem3" />
+        <Measure DataMember="Quantity" DefaultId="DataItem4" />
+        <Dimension DataMember="SalesPerson" DefaultId="DataItem5" />
+        <Measure DataMember="SalesPerson" SummaryType="Count" DefaultId="DataItem6" />
+      </DataItems>
+      <HiddenDimensions>
+        <Dimension DefaultId="DataItem5" />
+      </HiddenDimensions>
+      <HiddenMeasures>
+        <Measure DefaultId="DataItem6" />
+      </HiddenMeasures>
+      <ViewArea TopLatitude="83.645130000000009" BottomLatitude="-55.611829999999962" LeftLongitude="-179.99999999999997" CenterPointLatitude="44.08908074480383" CenterPointLongitude="1.4210854715202004E-13" />
+      <MapLegend />
+      <WeightedLegend />
+      <TooltipMeasures>
+        <TooltipMeasure DefaultId="DataItem4" />
+      </TooltipMeasures>
+      <Latitude DefaultId="DataItem0" />
+      <Longitude DefaultId="DataItem1" />
+      <TooltipDimensions>
+        <TooltipDimension DefaultId="DataItem3" />
+      </TooltipDimensions>
+      <Value DefaultId="DataItem2" />
+    </GeoPointMap>
   </Items>
   <LayoutTree>
     <LayoutGroup Weight="100">
@@ -62,7 +90,10 @@
           <LayoutItem DashboardItem="pieDashboardItem1" Weight="100.31558474435263" />
           <LayoutItem DashboardItem="gridDashboardItem1" Weight="100.31558474435263" />
         </LayoutGroup>
-        <LayoutItem DashboardItem="chartDashboardItem1" Weight="100.31558474435263" />
+        <LayoutGroup Weight="100.31558474435263">
+          <LayoutItem DashboardItem="chartDashboardItem1" Weight="100.31558474435263" />
+          <LayoutItem DashboardItem="geoPointMapDashboardItem1" Weight="100.31558474435263" />
+        </LayoutGroup>
       </LayoutGroup>
     </LayoutGroup>
   </LayoutTree>
