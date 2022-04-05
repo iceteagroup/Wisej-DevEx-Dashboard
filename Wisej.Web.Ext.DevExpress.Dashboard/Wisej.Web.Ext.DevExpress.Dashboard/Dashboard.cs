@@ -746,6 +746,23 @@ namespace Wisej.Web.Ext.DevExpress.Dashboard
 		}
 		private MobileLayoutMode _mobileLayoutEnabled = MobileLayoutMode.Auto;
 
+		public WorkingMode WorkingMode
+        {
+			get
+            {
+				return this._workingMode;
+            }
+			set
+            {
+				if (this._workingMode != value)
+                {
+					this._workingMode = value;
+					Update();
+                }
+            }
+        }
+		private WorkingMode _workingMode = WorkingMode.Designer;
+
 		#endregion
 
 		#region Methods
@@ -827,6 +844,7 @@ namespace Wisej.Web.Ext.DevExpress.Dashboard
 			dashboard.Enabled = this.Enabled;
 			dashboard.BackColor = this.BackColor;
 			dashboard.ColorScheme = this.ColorScheme;
+			dashboard.WorkingMode = this.WorkingMode;
 			dashboard.EnableCustomSql = this.EnableCustomSql;
 			dashboard.DashboardXmlPath = this.DashboardXmlPath;
 			dashboard.AllowMaximizeItems = this.AllowMaximizeItems;
